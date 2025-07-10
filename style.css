@@ -1,0 +1,118 @@
+body {
+    font-family: Arial,sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(kensleche/IMG-20250709-WA0004.jpg);
+
+}
+header{
+    background-color: #333;
+    color: #f2f2f2;
+    padding: 20px;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav ul li {
+    margin-right: 20px;
+}
+
+header nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+section {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.package-container {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rbga(0, 0, 0, 0.1);
+}
+.gallery-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 10px;
+}
+
+body {
+    background-image: url('kensleche/WhatsApp\ Image\ 2025-07-09\ at\ 23.29.37_83d344fa.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+video{
+    border-radius: 100px;
+}
+@media (max-width: 750px) {
+    .gallery-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width:751px) and (max-width: 999px) {
+    .gallery-container{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (min-width: 1000px) {
+    .gallery-container{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+button{
+    background-color: blue;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 4px 4px 4px 4px ;
+    border: solid;
+    border-width: 1px;
+    height: 40px;
+    border-radius: 15px;
+    border-color: gray;
+}
+button:hover{
+    background-color: rgb(0, 0, 255);
+    color: white;
+    opacity: 0.8;
+}
+button:active{
+    opacity: 1;
+    background-color: white;
+    color: blue;
+}
+.image{
+    border-radius: 100px;
+}
+.break{
+    color: white;
+}
+.link{
+    color: #fff;
+     
+}
+.link:hover{ 
+    color: gray;
+}
+.link:active{ 
+    color: blue;
+}
