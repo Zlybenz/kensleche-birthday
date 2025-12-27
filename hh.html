@@ -1,0 +1,3153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEEBEE LUXURY - Premium Perfumes, Jewelry & Clothing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        /* Theme Variables */
+        :root {
+            --primary-pink: #e91e63;
+            --primary-white: #ffffff;
+            --primary-black: #000000;
+            --light-pink: #fce4ec;
+            --dark-pink: #ad1457;
+            --gray-light: #f5f5f5;
+            --gray-dark: #333333;
+        }
+
+        .dark-theme {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .dark-theme header,
+        .dark-theme .product-card,
+        .dark-theme .modal-content {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .dark-theme .nav-menu a {
+            color: #ffffff;
+        }
+
+        .light-theme {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--primary-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo h1 {
+            color: var(--primary-black);
+            font-size: 28px;
+        }
+
+        .logo span {
+            color: var(--primary-pink);
+        }
+
+        .theme-btn {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-login {
+            color: var(--primary-pink);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cart-icon {
+            position: relative;
+            color: var(--primary-black);
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        #cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-pink);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Navigation */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            padding: 15px 0;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--gray-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--primary-pink);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--primary-white);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn-primary {
+            background: var(--primary-pink);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--dark-pink);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 60px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--gray-dark);
+            font-size: 36px;
+        }
+
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--primary-pink);
+            background: transparent;
+            color: var(--primary-pink);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--primary-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--gray-dark);
+        }
+
+        .product-price {
+            color: var(--primary-pink);
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .discount-badge {
+            background: #ff4081;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .stock-info {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .stock-low {
+            color: #ff5722;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: var(--dark-pink);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: var(--primary-white);
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray-dark);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .order-summary {
+            background: var(--gray-light);
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .payment-note {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+
+        .admin-number {
+            background: var(--light-pink);
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            color: var(--primary-pink);
+        }
+
+        /* Image Upload Styles */
+        .image-upload-container {
+            margin: 15px 0;
+        }
+
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+        }
+
+        .image-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .image-preview-placeholder {
+            text-align: center;
+            color: #999;
+        }
+
+        .image-preview-placeholder i {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #e91e63;
+        }
+
+        .upload-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .upload-btn:hover {
+            background: #ad1457;
+        }
+
+        #image-file {
+            display: none;
+        }
+
+        .upload-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .url-input-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .url-input-group input {
+            flex: 1;
+        }
+
+        /* Order Management Styles */
+        .order-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-btn.active {
+            background: #e91e63;
+            color: white;
+            border-color: #e91e63;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .btn-reject {
+            background: #ff9800;
+            color: white;
+        }
+
+        .btn-cancel {
+            background: #ff5722;
+            color: white;
+        }
+
+        .btn-complete {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-delete-order {
+            background: #f44336;
+            color: white;
+        }
+
+        .status-rejected {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .status-cancelled {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .status-completed {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .bulk-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .order-date-filter {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .date-input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-black);
+            color: var(--primary-white);
+            padding: 40px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3,
+        .footer-section h4 {
+            color: var(--primary-pink);
+            margin-bottom: 15px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 14px;
+        }
+
+        .admin-note {
+            text-align: center;
+            color: #ff9800;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        /* Admin Login Page */
+        .admin-login-page {
+            display: none;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .admin-login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .admin-login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .admin-login-box h2 {
+            color: #e91e63;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Admin Dashboard */
+        .admin-page {
+            display: none;
+        }
+
+        .admin-container {
+            padding: 20px;
+        }
+        
+        .admin-nav {
+            background: #e91e63;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+        
+        .admin-nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        
+        .admin-nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .recent-orders {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .order-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            display: inline-block;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-verified {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-shipped {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .notification-bell {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e91e63;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff0000;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action-btn {
+            padding: 10px 20px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+
+        .btn-view {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-verify {
+            background: #2196F3;
+            color: white;
+        }
+
+        .btn-edit {
+            background: #FF9800;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+
+        /* Customer Dashboard */
+        .customer-dashboard {
+            display: none;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            background: var(--primary-pink);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 30px;
+        }
+
+        .dashboard-sidebar {
+            background: var(--primary-white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-sidebar ul {
+            list-style: none;
+        }
+
+        .dashboard-sidebar li {
+            margin-bottom: 10px;
+        }
+
+        .dashboard-sidebar a {
+            color: var(--gray-dark);
+            text-decoration: none;
+            padding: 10px;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .dashboard-sidebar a:hover,
+        .dashboard-sidebar a.active {
+            background: var(--primary-pink);
+            color: white;
+        }
+
+        .dashboard-content {
+            background: var(--primary-white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .dashboard-section {
+            display: none;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .orders-table th {
+            background: var(--light-pink);
+            color: var(--primary-pink);
+        }
+
+        /* Authentication Modal */
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            background: #f5f5f5;
+            color: #333;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .auth-tab.active {
+            background: #e91e63;
+            color: white;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+            }
+            
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .upload-options {
+                flex-direction: column;
+            }
+            
+            .order-filters {
+                flex-direction: column;
+            }
+            
+            .order-date-filter {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .order-actions {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body class="default-theme">
+    <!-- Main Store Page -->
+    <div id="main-store">
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="header-top">
+                    <div class="logo">
+                        <h1>DEEBEE <span>LUXURY</span></h1>
+                    </div>
+                    <div class="header-actions">
+                        <button id="theme-toggle" class="theme-btn">
+                            <i class="fas fa-palette"></i> Theme
+                        </button>
+                        <div class="user-actions">
+                            <button onclick="showAuthModal()" class="btn-login">
+                                <i class="fas fa-user"></i> Account
+                            </button>
+                            <a href="#" class="cart-icon" onclick="openPaymentModal()">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span id="cart-count">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <nav>
+                    <ul class="nav-menu">
+                        <li><a href="#" class="active" onclick="showMainStore()">Home</a></li>
+                        <li><a href="#perfumes">Perfumes</a></li>
+                        <li><a href="#jewelry">Jewelry</a></li>
+                        <li><a href="#clothing">Clothing</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#" onclick="showAdminLogin()" style="color: #ff4081;">
+                            <i class="fas fa-lock"></i> Admin
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Luxury Redefined</h2>
+                    <p>Discover exclusive perfumes, fine jewelry, and premium clothing</p>
+                    <a href="#products" class="btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section id="products" class="products-section">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="category-filter">
+                    <button class="category-btn active" data-category="all">All Products</button>
+                    <button class="category-btn" data-category="perfume">Perfumes</button>
+                    <button class="category-btn" data-category="jewelry">Jewelry</button>
+                    <button class="category-btn" data-category="clothing">Clothing</button>
+                </div>
+                
+                <div class="products-grid" id="products-container">
+                    <!-- Products will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Modal -->
+        <div id="payment-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal('payment-modal')">&times;</span>
+                <h3>Complete Your Purchase</h3>
+                <form id="payment-form">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Home Address</label>
+                        <textarea id="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Location (City/Region)</label>
+                        <input type="text" id="location" required>
+                    </div>
+                    
+                    <div class="order-summary">
+                        <h4>Order Summary</h4>
+                        <div id="order-items"></div>
+                        <div class="total">
+                            <strong>Total: GH₵ <span id="order-total">0.00</span></strong>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <h4>Payment Method</h4>
+                        <p>Mobile Money (All Networks in Ghana)</p>
+                        <p class="payment-note">You will be prompted to enter your MoMo PIN to complete payment to:</p>
+                        <p class="admin-number">MTN: +233 54 740 2979</p>
+                        
+                        <div class="form-group">
+                            <label for="transaction-id">Transaction ID (After Payment)</label>
+                            <input type="text" id="transaction-id" placeholder="Enter transaction ID from payment">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-lock"></i> Pay Now
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Authentication Modal -->
+        <div id="auth-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal('auth-modal')">&times;</span>
+                
+                <div class="auth-tabs">
+                    <button class="auth-tab active" onclick="switchAuthTab('login')">Login</button>
+                    <button class="auth-tab" onclick="switchAuthTab('register')">Register</button>
+                </div>
+                
+                <div id="login-form" class="auth-form active">
+                    <h3>Login to Your Account</h3>
+                    <form id="customer-login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Login</button>
+                    </form>
+                </div>
+                
+                <div id="register-form" class="auth-form">
+                    <h3>Create New Account</h3>
+                    <form id="customer-register-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-phone">Phone Number</label>
+                            <input type="tel" id="register-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>DEEBEE LUXURY</h3>
+                        <p>Premium perfumes, jewelry and clothing store</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Contact</h4>
+                        <p>Email: info@deebeeluxury.com</p>
+                        <p>Phone: +233 24 123 4567</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Payment</h4>
+                        <p>MTN Mobile Money</p>
+                        <p>+233 54 740 2979</p>
+                    </div>
+                </div>
+                <p class="copyright">&copy; 2024 DEEBEE LUXURY. All rights reserved.</p>
+                <p class="admin-note">⚠️ Admin panel access is restricted</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Admin Login Page -->
+    <div id="admin-login-page" class="admin-login-page">
+        <div class="container admin-login-container">
+            <div class="admin-login-box">
+                <h2><i class="fas fa-lock"></i> Admin Access</h2>
+                <form id="admin-login-form">
+                    <div class="form-group">
+                        <label>Admin Email</label>
+                        <input type="email" id="admin-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="admin-password" required>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">
+                        Verify & Access Dashboard
+                    </button>
+                </form>
+                <p style="text-align: center; margin-top: 20px; color: #666; font-size: 0.9em;">
+                    <i class="fas fa-shield-alt"></i> Restricted Access - Admin Only
+                </p>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button onclick="showMainStore()" class="btn-login">
+                        <i class="fas fa-arrow-left"></i> Back to Store
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard-page" class="admin-page">
+        <div class="notification-bell" id="notification-bell" onclick="showNotifications()">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge" id="notification-count">0</span>
+        </div>
+        
+        <div class="admin-nav">
+            <div class="container">
+                <ul>
+                    <li><a href="#" onclick="showAdminDashboard()"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#" onclick="showAdminProducts()"><i class="fas fa-box"></i> Products</a></li>
+                    <li><a href="#" onclick="showAdminOrders()"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+                    <li><a href="#" onclick="showMainStore()"><i class="fas fa-store"></i> Store</a></li>
+                    <li><a href="#" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="container admin-container" id="admin-dashboard-content">
+            <h1>Admin Dashboard</h1>
+            
+            <div class="quick-actions">
+                <button class="quick-action-btn" onclick="openProductModal()">
+                    <i class="fas fa-plus"></i> Add Product
+                </button>
+                <button class="quick-action-btn" onclick="showAdminOrders()">
+                    <i class="fas fa-list"></i> Manage Orders
+                </button>
+                <button class="quick-action-btn" onclick="showAdminProducts()">
+                    <i class="fas fa-tag"></i> Manage Products
+                </button>
+                <button class="quick-action-btn" onclick="cleanupOldOrders()" style="background: #ff9800;">
+                    <i class="fas fa-trash"></i> Clean Old Orders
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Orders</h3>
+                    <div class="stat-value" id="total-orders">0</div>
+                    <p>Today: <span id="today-orders">0</span></p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Revenue</h3>
+                    <div class="stat-value">GH₵ <span id="total-revenue">0.00</span></div>
+                    <p>Pending: GH₵ <span id="pending-revenue">0.00</span></p>
+                </div>
+                <div class="stat-card">
+                    <h3>Low Stock Items</h3>
+                    <div class="stat-value" id="low-stock">0</div>
+                    <p>Items below 10 units</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Verification</h3>
+                    <div class="stat-value" id="pending-verification">0</div>
+                    <p>Payments to verify</p>
+                </div>
+            </div>
+            
+            <div class="recent-orders">
+                <h2>Recent Orders</h2>
+                <div id="orders-list">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Products Management -->
+        <div class="container admin-container" id="admin-products-content" style="display: none;">
+            <h1>Product Management</h1>
+            <button class="btn-primary" onclick="openProductModal()" style="margin-bottom: 20px;">
+                <i class="fas fa-plus"></i> Add New Product
+            </button>
+            <div id="products-list">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Orders Management -->
+        <div class="container admin-container" id="admin-orders-content" style="display: none;">
+            <h1>Order Management</h1>
+            
+            <div class="bulk-actions">
+                <button class="btn-primary" onclick="rejectSelectedOrders()">
+                    <i class="fas fa-times"></i> Reject Selected
+                </button>
+                <button class="btn-delete" onclick="deleteSelectedOrders()">
+                    <i class="fas fa-trash"></i> Delete Selected
+                </button>
+                <button class="btn-complete" onclick="completeSelectedOrders()">
+                    <i class="fas fa-check"></i> Mark as Completed
+                </button>
+            </div>
+            
+            <div class="order-filters">
+                <button class="filter-btn active" onclick="filterOrders('all')">All Orders</button>
+                <button class="filter-btn" onclick="filterOrders('pending')">Pending</button>
+                <button class="filter-btn" onclick="filterOrders('verified')">Verified</button>
+                <button class="filter-btn" onclick="filterOrders('rejected')">Rejected</button>
+                <button class="filter-btn" onclick="filterOrders('completed')">Completed</button>
+                <button class="filter-btn" onclick="filterOrders('cancelled')">Cancelled</button>
+            </div>
+            
+            <div class="order-date-filter">
+                <label>Filter by Date:</label>
+                <input type="date" id="start-date" class="date-input">
+                <span>to</span>
+                <input type="date" id="end-date" class="date-input">
+                <button class="btn-primary" onclick="filterByDate()">Apply</button>
+                <button class="btn-small" onclick="clearDateFilter()">Clear</button>
+            </div>
+            
+            <div style="margin-bottom: 15px;">
+                <label>
+                    <input type="checkbox" id="select-all-orders" onchange="toggleSelectAllOrders(this)">
+                    Select All Visible Orders
+                </label>
+                <span id="selected-count" style="margin-left: 15px; color: #666;">0 orders selected</span>
+            </div>
+            
+            <div id="admin-orders-list">
+                <!-- All orders will be loaded here -->
+            </div>
+            
+            <div class="bulk-actions" style="margin-top: 20px;">
+                <button class="btn-primary" onclick="rejectSelectedOrders()">
+                    <i class="fas fa-times"></i> Reject Selected
+                </button>
+                <button class="btn-delete" onclick="deleteSelectedOrders()">
+                    <i class="fas fa-trash"></i> Delete Selected
+                </button>
+                <button class="btn-complete" onclick="completeSelectedOrders()">
+                    <i class="fas fa-check"></i> Mark as Completed
+                </button>
+                <button class="btn-small" onclick="cleanupOldOrders()" style="background: #ff9800;">
+                    <i class="fas fa-broom"></i> Clean Orders Older Than 30 Days
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Management Modal -->
+        <div id="product-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModal('product-modal')">&times;</span>
+                <h3>Manage Product</h3>
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <div class="form-group">
+                        <label for="product-name">Product Name</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-category">Category</label>
+                        <select id="product-category" required>
+                            <option value="perfume">Perfume</option>
+                            <option value="jewelry">Jewelry</option>
+                            <option value="clothing">Clothing</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Price (GH₵)</label>
+                        <input type="number" id="product-price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-stock">Stock Quantity</label>
+                        <input type="number" id="product-stock" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-discount">Discount (%)</label>
+                        <input type="number" id="product-discount" min="0" max="100" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div class="image-upload-container">
+                            <div class="image-preview" id="image-preview">
+                                <div class="image-preview-placeholder">
+                                    <i class="fas fa-image"></i>
+                                    <p>No image selected</p>
+                                </div>
+                                <img id="preview-img" src="" alt="Preview">
+                            </div>
+                            
+                            <div class="upload-options">
+                                <button type="button" class="upload-btn" onclick="document.getElementById('image-file').click()">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                </button>
+                                <button type="button" class="upload-btn" onclick="useImageUrl()" style="background: #4CAF50;">
+                                    <i class="fas fa-link"></i> Use URL
+                                </button>
+                            </div>
+                            
+                            <div class="url-input-group" id="url-input-group" style="display: none;">
+                                <input type="text" id="image-url" placeholder="Enter image URL">
+                                <button type="button" class="upload-btn" onclick="loadImageFromUrl()" style="background: #2196F3;">
+                                    Load
+                                </button>
+                            </div>
+                            
+                            <input type="file" id="image-file" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+                            <input type="hidden" id="product-image" value="">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="product-description">Description</label>
+                        <textarea id="product-description"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Product</button>
+                    <button type="button" class="btn-delete btn-small" id="delete-product" style="display: none; margin-top: 10px;" onclick="deleteCurrentProduct()">Delete Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Customer Dashboard -->
+    <div id="customer-dashboard-page" class="customer-dashboard">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1>Customer Dashboard</h1>
+                <p>Welcome back! Manage your orders and account details</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-sidebar">
+                    <ul>
+                        <li><a href="#" class="active" onclick="showDashboardSection('orders')">
+                            <i class="fas fa-shopping-cart"></i> My Orders
+                        </a></li>
+                        <li><a href="#" onclick="showDashboardSection('profile')">
+                            <i class="fas fa-user"></i> Profile
+                        </a></li>
+                        <li><a href="#" onclick="showMainStore()">
+                            <i class="fas fa-store"></i> Continue Shopping
+                        </a></li>
+                        <li><a href="#" onclick="logoutCustomer()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="dashboard-content">
+                    <div id="dashboard-orders" class="dashboard-section">
+                        <h2>My Orders</h2>
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customer-orders">
+                                <!-- Orders will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="dashboard-profile" class="dashboard-section" style="display: none;">
+                        <h2>Profile Information</h2>
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label for="customer-name">Full Name</label>
+                                <input type="text" id="customer-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-email">Email</label>
+                                <input type="email" id="customer-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="customer-phone">Phone Number</label>
+                                <input type="tel" id="customer-phone" required>
+                            </div>
+                            <button type="submit" class="btn-primary">Update Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global Variables
+        let products = [];
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let currentCustomer = JSON.parse(localStorage.getItem('currentCustomer'));
+        let isAdminAuthenticated = localStorage.getItem('adminAuthenticated') === 'true';
+        let currentAdminSection = 'dashboard';
+        let currentOrderFilter = 'all';
+        let selectedOrders = new Set();
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Website initialized');
+            initializeTheme();
+            loadProducts();
+            updateCartCount();
+            initializeEventListeners();
+            checkCustomerAuth();
+            
+            // Check if admin is already authenticated
+            if (isAdminAuthenticated) {
+                showAdminDashboard();
+            }
+        });
+
+        // ========== THEME MANAGEMENT ==========
+        function initializeTheme() {
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'default-theme';
+            body.className = savedTheme;
+            
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    const themes = ['default-theme', 'dark-theme', 'light-theme'];
+                    const currentTheme = body.className;
+                    const currentIndex = themes.indexOf(currentTheme);
+                    const nextIndex = (currentIndex + 1) % themes.length;
+                    const nextTheme = themes[nextIndex];
+                    
+                    body.className = nextTheme;
+                    localStorage.setItem('theme', nextTheme);
+                    showNotification(`Theme changed to ${nextTheme.replace('-theme', '')}`);
+                });
+            }
+        }
+
+        // ========== PRODUCT MANAGEMENT ==========
+        function loadProducts() {
+            try {
+                // Try to load from localStorage first
+                const savedProducts = localStorage.getItem('products');
+                if (savedProducts) {
+                    products = JSON.parse(savedProducts);
+                } else {
+                    // Fallback to sample products
+                    products = getSampleProducts();
+                    localStorage.setItem('products', JSON.stringify(products));
+                }
+                displayProducts(products);
+            } catch (error) {
+                console.error('Error loading products:', error);
+                products = getSampleProducts();
+                displayProducts(products);
+            }
+        }
+
+        function displayProducts(productsToDisplay) {
+            const container = document.getElementById('products-container');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            productsToDisplay.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.dataset.category = product.category;
+                
+                const discountBadge = product.discount > 0 ? 
+                    `<span class="discount-badge">-${product.discount}%</span>` : '';
+                
+                const originalPrice = product.discount > 0 ?
+                    `<span class="original-price">GH₵${product.price.toFixed(2)}</span>` : '';
+                
+                const discountedPrice = product.discount > 0 ?
+                    product.price * (1 - product.discount / 100) : product.price;
+                
+                const stockClass = product.stock < 10 ? 'stock-low' : '';
+                const stockText = product.stock > 0 ? 
+                    `<p class="stock-info ${stockClass}">${product.stock} left in stock</p>` :
+                    '<p class="stock-info" style="color:red;">Out of stock</p>';
+                
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='https://via.placeholder.com/400x300?text=Product+Image'">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-price">
+                            ${originalPrice}
+                            GH₵${discountedPrice.toFixed(2)}
+                            ${discountBadge}
+                        </div>
+                        ${stockText}
+                        <button class="add-to-cart" data-id="${product.id}" 
+                                ${product.stock === 0 ? 'disabled' : ''}>
+                            ${product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(productCard);
+            });
+            
+            // Add event listeners to add-to-cart buttons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = parseInt(this.dataset.id);
+                    addToCart(productId);
+                });
+            });
+            
+            // Category filtering
+            document.querySelectorAll('.category-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    if (category === 'all') {
+                        displayProducts(products);
+                    } else {
+                        const filteredProducts = products.filter(p => p.category === category);
+                        displayProducts(filteredProducts);
+                    }
+                });
+            });
+        }
+
+        // ========== IMAGE UPLOAD FUNCTIONALITY ==========
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validate file type only - NO SIZE LIMITATIONS
+            if (!file.type.match('image.*')) {
+                showNotification('Please select an image file (JPG, PNG, GIF, WEBP, BMP, SVG)', 'error');
+                return;
+            }
+            
+            // Show loading message
+            const placeholder = document.querySelector('.image-preview-placeholder');
+            placeholder.innerHTML = '<i class="fas fa-spinner fa-spin"></i><p>Loading image...</p>';
+            
+            const reader = new FileReader();
+            
+            reader.onloadstart = function() {
+                // Show loading state
+                placeholder.innerHTML = '<i class="fas fa-spinner fa-spin"></i><p>Reading image file...</p>';
+            };
+            
+            reader.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    const percentLoaded = Math.round((e.loaded / e.total) * 100);
+                    placeholder.innerHTML = `<i class="fas fa-spinner fa-spin"></i><p>Loading... ${percentLoaded}%</p>`;
+                }
+            };
+            
+            reader.onload = function(e) {
+                // Store the image as Base64 data URL
+                const imageData = e.target.result;
+                document.getElementById('product-image').value = imageData;
+                
+                // Show preview
+                const previewImg = document.getElementById('preview-img');
+                previewImg.src = imageData;
+                previewImg.style.display = 'block';
+                
+                // Hide placeholder
+                placeholder.style.display = 'none';
+                
+                // Show success message
+                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                showNotification(`Image uploaded successfully! Size: ${fileSizeMB} MB`);
+            };
+            
+            reader.onerror = function() {
+                placeholder.innerHTML = '<i class="fas fa-exclamation-triangle"></i><p>Error loading image</p>';
+                showNotification('Error loading image file. Please try again.', 'error');
+            };
+            
+            // Read the file as data URL - no size limitations
+            reader.readAsDataURL(file);
+        }
+
+        function useImageUrl() {
+            const urlGroup = document.getElementById('url-input-group');
+            urlGroup.style.display = 'flex';
+        }
+
+        function loadImageFromUrl() {
+            const imageUrl = document.getElementById('image-url').value.trim();
+            
+            if (!imageUrl) {
+                showNotification('Please enter an image URL', 'error');
+                return;
+            }
+            
+            // Validate URL
+            try {
+                new URL(imageUrl);
+            } catch (e) {
+                showNotification('Please enter a valid URL', 'error');
+                return;
+            }
+            
+            // Set the image URL
+            document.getElementById('product-image').value = imageUrl;
+            
+            // Show loading
+            const placeholder = document.querySelector('.image-preview-placeholder');
+            placeholder.innerHTML = '<i class="fas fa-spinner fa-spin"></i><p>Loading image from URL...</p>';
+            
+            // Show preview
+            const previewImg = document.getElementById('preview-img');
+            previewImg.src = imageUrl;
+            previewImg.style.display = 'block';
+            previewImg.onload = function() {
+                placeholder.style.display = 'none';
+                showNotification('Image loaded from URL successfully!');
+            };
+            previewImg.onerror = function() {
+                placeholder.innerHTML = '<i class="fas fa-exclamation-triangle"></i><p>Could not load image</p>';
+                previewImg.style.display = 'none';
+                showNotification('Could not load image from URL', 'error');
+            };
+            
+            // Hide URL input
+            document.getElementById('url-input-group').style.display = 'none';
+        }
+
+        // ========== CART FUNCTIONALITY ==========
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product || product.stock === 0) {
+                showNotification('Product is out of stock!', 'error');
+                return;
+            }
+            
+            const cartItem = cart.find(item => item.id === productId);
+            
+            if (cartItem) {
+                if (cartItem.quantity < product.stock) {
+                    cartItem.quantity++;
+                } else {
+                    showNotification('Cannot add more items than available in stock');
+                    return;
+                }
+            } else {
+                cart.push({
+                    id: productId,
+                    name: product.name,
+                    price: product.discount > 0 ? 
+                        product.price * (1 - product.discount / 100) : product.price,
+                    quantity: 1,
+                    image: product.image
+                });
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(`${product.name} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        // ========== EVENT LISTENERS ==========
+        function initializeEventListeners() {
+            console.log('Initializing event listeners...');
+            
+            // Payment form
+            const paymentForm = document.getElementById('payment-form');
+            if (paymentForm) {
+                paymentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    processPayment();
+                });
+            }
+
+            // Customer login form
+            const customerLoginForm = document.getElementById('customer-login-form');
+            if (customerLoginForm) {
+                customerLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    loginCustomer();
+                });
+            }
+
+            // Customer register form
+            const customerRegisterForm = document.getElementById('customer-register-form');
+            if (customerRegisterForm) {
+                customerRegisterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    registerCustomer();
+                });
+            }
+
+            // Admin login form
+            const adminLoginForm = document.getElementById('admin-login-form');
+            if (adminLoginForm) {
+                adminLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    authenticateAdmin();
+                });
+            }
+
+            // Product form
+            const productForm = document.getElementById('product-form');
+            if (productForm) {
+                productForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    saveProduct();
+                });
+            }
+
+            // Profile form
+            const profileForm = document.getElementById('profile-form');
+            if (profileForm) {
+                profileForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    updateCustomerProfile();
+                });
+            }
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+        }
+
+        // ========== PAYMENT FUNCTIONALITY ==========
+        function openPaymentModal() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty! Add some products first.');
+                return;
+            }
+            
+            // Check if customer is logged in
+            if (!currentCustomer) {
+                showNotification('Please login to make a purchase');
+                showAuthModal();
+                return;
+            }
+
+            const modal = document.getElementById('payment-modal');
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            
+            // Calculate total
+            let total = 0;
+            orderItems.innerHTML = '';
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const itemElement = document.createElement('div');
+                itemElement.style.cssText = 'display: flex; justify-content: space-between; margin-bottom: 10px;';
+                itemElement.innerHTML = `
+                    <span>${item.name} x${item.quantity}</span>
+                    <span>GH₵${itemTotal.toFixed(2)}</span>
+                `;
+                orderItems.appendChild(itemElement);
+            });
+            
+            orderTotal.textContent = total.toFixed(2);
+            
+            // Pre-fill customer information
+            if (currentCustomer) {
+                document.getElementById('full-name').value = currentCustomer.name || '';
+                document.getElementById('email').value = currentCustomer.email || '';
+                document.getElementById('phone').value = currentCustomer.phone || '';
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function processPayment() {
+            const fullName = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const address = document.getElementById('address').value;
+            const location = document.getElementById('location').value;
+            const transactionId = document.getElementById('transaction-id').value;
+            
+            if (!transactionId) {
+                showNotification('Please enter your transaction ID', 'error');
+                return;
+            }
+            
+            // Create order object
+            const order = {
+                id: generateOrderId(),
+                customer: {
+                    name: fullName,
+                    email: email,
+                    phone: phone,
+                    address: address,
+                    location: location
+                },
+                items: [...cart],
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                transactionId: transactionId,
+                status: 'pending',
+                date: new Date().toISOString(),
+                customerId: currentCustomer?.id
+            };
+            
+            // Save order
+            saveOrder(order);
+            
+            // Update stock
+            updateStock();
+            
+            // Clear cart
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show success message
+            showNotification('Payment submitted! Admin will verify your payment.', 'success');
+            
+            // Close modal
+            closeModal('payment-modal');
+            
+            // Clear form
+            document.getElementById('payment-form').reset();
+            
+            // Send notification to admin
+            simulateAdminNotification(order);
+        }
+
+        function generateOrderId() {
+            return 'ORD-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5).toUpperCase();
+        }
+
+        function saveOrder(order) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+        }
+
+        function updateStock() {
+            cart.forEach(cartItem => {
+                const product = products.find(p => p.id === cartItem.id);
+                if (product) {
+                    product.stock -= cartItem.quantity;
+                    if (product.stock < 0) product.stock = 0;
+                }
+            });
+            
+            // Update products
+            localStorage.setItem('products', JSON.stringify(products));
+            
+            // Refresh product display
+            displayProducts(products);
+            
+            // Update admin dashboard if open
+            if (isAdminAuthenticated && currentAdminSection === 'dashboard') {
+                updateStockStats();
+            }
+        }
+
+        function simulateAdminNotification(order) {
+            const notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+            notifications.push({
+                type: 'new_order',
+                orderId: order.id,
+                message: `New order from ${order.customer.name} - GH₵${order.total.toFixed(2)}`,
+                time: new Date().toISOString(),
+                read: false
+            });
+            localStorage.setItem('adminNotifications', JSON.stringify(notifications));
+            
+            // Update admin notification count if admin is viewing
+            updateAdminNotificationCount();
+        }
+
+        // ========== CUSTOMER AUTHENTICATION ==========
+        function checkCustomerAuth() {
+            if (currentCustomer) {
+                // Customer is logged in
+                const loginBtn = document.querySelector('.btn-login');
+                if (loginBtn) {
+                    loginBtn.innerHTML = `<i class="fas fa-user"></i> ${currentCustomer.name.split(' ')[0]}`;
+                    loginBtn.onclick = showCustomerDashboard;
+                }
+            }
+        }
+
+        function showAuthModal() {
+            switchAuthTab('login');
+            document.getElementById('auth-modal').style.display = 'block';
+        }
+
+        function switchAuthTab(tab) {
+            // Update tabs
+            document.querySelectorAll('.auth-tab').forEach(t => {
+                t.classList.remove('active');
+            });
+            document.querySelectorAll('.auth-form').forEach(f => {
+                f.classList.remove('active');
+            });
+            
+            if (tab === 'login') {
+                document.querySelector('.auth-tab:nth-child(1)').classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                document.querySelector('.auth-tab:nth-child(2)').classList.add('active');
+                document.getElementById('register-form').classList.add('active');
+            }
+        }
+
+        function loginCustomer() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+            const customer = customers.find(c => c.email === email && c.password === password);
+            
+            if (customer) {
+                currentCustomer = customer;
+                localStorage.setItem('currentCustomer', JSON.stringify(customer));
+                showNotification('Login successful!', 'success');
+                closeModal('auth-modal');
+                checkCustomerAuth();
+            } else {
+                showNotification('Invalid email or password', 'error');
+            }
+        }
+
+        function registerCustomer() {
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const phone = document.getElementById('register-phone').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+            
+            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+            
+            // Check if email already exists
+            if (customers.some(c => c.email === email)) {
+                showNotification('Email already registered', 'error');
+                return;
+            }
+            
+            const newCustomer = {
+                id: Date.now(),
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                createdAt: new Date().toISOString()
+            };
+            
+            customers.push(newCustomer);
+            localStorage.setItem('customers', JSON.stringify(customers));
+            
+            currentCustomer = newCustomer;
+            localStorage.setItem('currentCustomer', JSON.stringify(newCustomer));
+            
+            showNotification('Registration successful! You are now logged in.', 'success');
+            closeModal('auth-modal');
+            checkCustomerAuth();
+        }
+
+        function updateCustomerProfile() {
+            if (!currentCustomer) return;
+            
+            const name = document.getElementById('customer-name').value;
+            const email = document.getElementById('customer-email').value;
+            const phone = document.getElementById('customer-phone').value;
+            
+            // Update current customer
+            currentCustomer.name = name;
+            currentCustomer.email = email;
+            currentCustomer.phone = phone;
+            localStorage.setItem('currentCustomer', JSON.stringify(currentCustomer));
+            
+            // Update in customers list
+            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+            const customerIndex = customers.findIndex(c => c.id === currentCustomer.id);
+            if (customerIndex !== -1) {
+                customers[customerIndex] = currentCustomer;
+                localStorage.setItem('customers', JSON.stringify(customers));
+            }
+            
+            showNotification('Profile updated successfully!', 'success');
+            checkCustomerAuth();
+        }
+
+        function logoutCustomer() {
+            currentCustomer = null;
+            localStorage.removeItem('currentCustomer');
+            showNotification('Logged out successfully', 'success');
+            showMainStore();
+        }
+
+        // ========== ADMIN FUNCTIONS ==========
+        function showAdminLogin() {
+            document.getElementById('main-store').style.display = 'none';
+            document.getElementById('customer-dashboard-page').style.display = 'none';
+            document.getElementById('admin-dashboard-page').style.display = 'none';
+            document.getElementById('admin-login-page').style.display = 'block';
+        }
+
+        function authenticateAdmin() {
+            const email = document.getElementById('admin-email').value;
+            const password = document.getElementById('admin-password').value;
+            
+            // Demo credentials
+            if (email === 'admin@deebeeluxury.com' && password === 'admin123') {
+                // Simulate sending verification code
+                const verificationCode = prompt('Enter verification code sent to your email (demo code: 123456):');
+                
+                if (verificationCode === '123456') {
+                    localStorage.setItem('adminAuthenticated', 'true');
+                    isAdminAuthenticated = true;
+                    showNotification('Admin authentication successful!', 'success');
+                    showAdminDashboard();
+                } else {
+                    showNotification('Invalid verification code', 'error');
+                }
+            } else {
+                showNotification('Invalid admin credentials', 'error');
+            }
+        }
+
+        function showAdminDashboard() {
+            if (!isAdminAuthenticated) {
+                showAdminLogin();
+                return;
+            }
+            
+            document.getElementById('main-store').style.display = 'none';
+            document.getElementById('customer-dashboard-page').style.display = 'none';
+            document.getElementById('admin-login-page').style.display = 'none';
+            document.getElementById('admin-dashboard-page').style.display = 'block';
+            
+            // Show dashboard content
+            document.getElementById('admin-dashboard-content').style.display = 'block';
+            document.getElementById('admin-products-content').style.display = 'none';
+            document.getElementById('admin-orders-content').style.display = 'none';
+            currentAdminSection = 'dashboard';
+            
+            // Load admin data
+            loadAdminDashboardData();
+        }
+
+        function showAdminProducts() {
+            if (!isAdminAuthenticated) {
+                showAdminLogin();
+                return;
+            }
+            
+            document.getElementById('admin-dashboard-content').style.display = 'none';
+            document.getElementById('admin-products-content').style.display = 'block';
+            document.getElementById('admin-orders-content').style.display = 'none';
+            currentAdminSection = 'products';
+            
+            loadAdminProducts();
+        }
+
+        function showAdminOrders() {
+            if (!isAdminAuthenticated) {
+                showAdminLogin();
+                return;
+            }
+            
+            document.getElementById('admin-dashboard-content').style.display = 'none';
+            document.getElementById('admin-products-content').style.display = 'none';
+            document.getElementById('admin-orders-content').style.display = 'block';
+            currentAdminSection = 'orders';
+            
+            loadAdminOrders();
+            updateSelectedCount();
+        }
+
+        function loadAdminDashboardData() {
+            updateOrderStats();
+            updateRevenueStats();
+            updateStockStats();
+            loadRecentOrders();
+            updateAdminNotificationCount();
+        }
+
+        function updateOrderStats() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const today = new Date().toDateString();
+            const todayOrders = orders.filter(order => 
+                new Date(order.date).toDateString() === today
+            );
+            
+            const totalOrdersElem = document.getElementById('total-orders');
+            const todayOrdersElem = document.getElementById('today-orders');
+            
+            if (totalOrdersElem) totalOrdersElem.textContent = orders.length;
+            if (todayOrdersElem) todayOrdersElem.textContent = todayOrders.length;
+        }
+
+        function updateRevenueStats() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+            const pendingRevenue = orders
+                .filter(order => order.status === 'pending')
+                .reduce((sum, order) => sum + order.total, 0);
+            
+            const totalRevenueElem = document.getElementById('total-revenue');
+            const pendingRevenueElem = document.getElementById('pending-revenue');
+            
+            if (totalRevenueElem) totalRevenueElem.textContent = totalRevenue.toFixed(2);
+            if (pendingRevenueElem) pendingRevenueElem.textContent = pendingRevenue.toFixed(2);
+        }
+
+        function updateStockStats() {
+            const lowStock = products.filter(p => p.stock < 10).length;
+            const pendingVerification = JSON.parse(localStorage.getItem('orders') || '[]')
+                .filter(order => order.status === 'pending').length;
+            
+            const lowStockElem = document.getElementById('low-stock');
+            const pendingVerificationElem = document.getElementById('pending-verification');
+            
+            if (lowStockElem) lowStockElem.textContent = lowStock;
+            if (pendingVerificationElem) pendingVerificationElem.textContent = pendingVerification;
+        }
+
+        function loadRecentOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const ordersList = document.getElementById('orders-list');
+            
+            if (!ordersList) return;
+            
+            ordersList.innerHTML = '';
+            
+            // Sort by most recent
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5) // Show last 5 orders
+                .forEach(order => {
+                    const orderElement = document.createElement('div');
+                    orderElement.className = 'order-item';
+                    
+                    orderElement.innerHTML = `
+                        <div>
+                            <strong>${order.id}</strong><br>
+                            <small>${order.customer.name} • ${order.customer.email}</small>
+                        </div>
+                        <div>
+                            <strong>GH₵${order.total.toFixed(2)}</strong><br>
+                            <span class="order-status status-${order.status}">${order.status}</span>
+                        </div>
+                        <div>
+                            <button class="btn-view btn-small" onclick="viewOrderDetails('${order.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn-verify btn-small" onclick="verifyPayment('${order.id}')" 
+                                    ${order.status !== 'pending' ? 'disabled' : ''}>
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn-reject btn-small" onclick="rejectOrder('${order.id}')" 
+                                    ${order.status === 'rejected' || order.status === 'cancelled' || order.status === 'completed' ? 'disabled' : ''}>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    `;
+                    
+                    ordersList.appendChild(orderElement);
+                });
+        }
+
+        function loadAdminProducts() {
+            const productsList = document.getElementById('products-list');
+            if (!productsList) return;
+            
+            productsList.innerHTML = '';
+            
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'order-item';
+                productElement.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;" onerror="this.src='https://via.placeholder.com/50x50?text=Product'">
+                        <div>
+                            <strong>${product.name}</strong><br>
+                            <small>${product.category} • Stock: ${product.stock}</small>
+                        </div>
+                    </div>
+                    <div>
+                        <strong>GH₵${product.price.toFixed(2)}</strong><br>
+                        ${product.discount > 0 ? `<small>Discount: ${product.discount}%</small>` : ''}
+                    </div>
+                    <div>
+                        <button class="btn-edit btn-small" onclick="editProduct(${product.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn-delete btn-small" onclick="deleteProduct(${product.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                productsList.appendChild(productElement);
+            });
+        }
+
+        function loadAdminOrders() {
+            const ordersList = document.getElementById('admin-orders-list');
+            if (!ordersList) return;
+            
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            
+            ordersList.innerHTML = '';
+            
+            // Clear selection
+            selectedOrders.clear();
+            
+            // Filter orders
+            let filteredOrders = orders;
+            if (currentOrderFilter !== 'all') {
+                filteredOrders = orders.filter(order => order.status === currentOrderFilter);
+            }
+            
+            // Sort by most recent
+            filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date))
+                .forEach(order => {
+                    const orderElement = document.createElement('div');
+                    orderElement.className = 'order-item';
+                    orderElement.innerHTML = `
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" class="order-checkbox" value="${order.id}" onchange="toggleOrderSelection('${order.id}', this.checked)">
+                                <div>
+                                    <strong>${order.id}</strong><br>
+                                    <small>${order.customer.name} • ${order.customer.phone}</small><br>
+                                    <small>${new Date(order.date).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>GH₵${order.total.toFixed(2)}</strong><br>
+                            <span class="order-status status-${order.status}">${order.status}</span><br>
+                            <small>TX ID: ${order.transactionId}</small>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-view btn-small" onclick="viewOrderDetails('${order.id}')">
+                                View
+                            </button>
+                            <button class="btn-verify btn-small" onclick="verifyPayment('${order.id}')" 
+                                    ${order.status !== 'pending' ? 'disabled' : ''}>
+                                Verify
+                            </button>
+                            <button class="btn-reject btn-small" onclick="rejectOrder('${order.id}')" 
+                                    ${order.status === 'rejected' || order.status === 'cancelled' || order.status === 'completed' ? 'disabled' : ''}>
+                                Reject
+                            </button>
+                            <button class="btn-complete btn-small" onclick="completeOrder('${order.id}')" 
+                                    ${order.status === 'completed' || order.status === 'cancelled' ? 'disabled' : ''}>
+                                Complete
+                            </button>
+                            <button class="btn-delete-order btn-small" onclick="deleteSingleOrder('${order.id}')">
+                                Delete
+                            </button>
+                        </div>
+                    `;
+                    ordersList.appendChild(orderElement);
+                });
+            
+            updateSelectedCount();
+        }
+
+        // ========== ORDER MANAGEMENT FUNCTIONS ==========
+        function filterOrders(status) {
+            currentOrderFilter = status;
+            
+            // Update filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            loadAdminOrders();
+        }
+
+        function filterByDate() {
+            const startDate = document.getElementById('start-date').value;
+            const endDate = document.getElementById('end-date').value;
+            
+            if (!startDate || !endDate) {
+                showNotification('Please select both start and end dates', 'error');
+                return;
+            }
+            
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            end.setHours(23, 59, 59, 999); // Include the entire end day
+            
+            const filteredOrders = orders.filter(order => {
+                const orderDate = new Date(order.date);
+                return orderDate >= start && orderDate <= end;
+            });
+            
+            const ordersList = document.getElementById('admin-orders-list');
+            if (!ordersList) return;
+            
+            ordersList.innerHTML = '';
+            
+            // Clear selection
+            selectedOrders.clear();
+            
+            // Sort by most recent
+            filteredOrders.sort((a, b) => new Date(b.date) - new Date(a.date))
+                .forEach(order => {
+                    const orderElement = document.createElement('div');
+                    orderElement.className = 'order-item';
+                    orderElement.innerHTML = `
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <input type="checkbox" class="order-checkbox" value="${order.id}" onchange="toggleOrderSelection('${order.id}', this.checked)">
+                                <div>
+                                    <strong>${order.id}</strong><br>
+                                    <small>${order.customer.name} • ${order.customer.phone}</small><br>
+                                    <small>${new Date(order.date).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <strong>GH₵${order.total.toFixed(2)}</strong><br>
+                            <span class="order-status status-${order.status}">${order.status}</span><br>
+                            <small>TX ID: ${order.transactionId}</small>
+                        </div>
+                        <div class="order-actions">
+                            <button class="btn-view btn-small" onclick="viewOrderDetails('${order.id}')">
+                                View
+                            </button>
+                            <button class="btn-verify btn-small" onclick="verifyPayment('${order.id}')" 
+                                    ${order.status !== 'pending' ? 'disabled' : ''}>
+                                Verify
+                            </button>
+                            <button class="btn-reject btn-small" onclick="rejectOrder('${order.id}')" 
+                                    ${order.status === 'rejected' || order.status === 'cancelled' || order.status === 'completed' ? 'disabled' : ''}>
+                                Reject
+                            </button>
+                            <button class="btn-complete btn-small" onclick="completeOrder('${order.id}')" 
+                                    ${order.status === 'completed' || order.status === 'cancelled' ? 'disabled' : ''}>
+                                Complete
+                            </button>
+                            <button class="btn-delete-order btn-small" onclick="deleteSingleOrder('${order.id}')">
+                                Delete
+                            </button>
+                        </div>
+                    `;
+                    ordersList.appendChild(orderElement);
+                });
+            
+            updateSelectedCount();
+            showNotification(`Showing ${filteredOrders.length} orders between ${startDate} and ${endDate}`);
+        }
+
+        function clearDateFilter() {
+            document.getElementById('start-date').value = '';
+            document.getElementById('end-date').value = '';
+            loadAdminOrders();
+        }
+
+        function toggleOrderSelection(orderId, isChecked) {
+            if (isChecked) {
+                selectedOrders.add(orderId);
+            } else {
+                selectedOrders.delete(orderId);
+            }
+            updateSelectedCount();
+        }
+
+        function toggleSelectAllOrders(checkbox) {
+            const checkboxes = document.querySelectorAll('.order-checkbox');
+            checkboxes.forEach(cb => {
+                cb.checked = checkbox.checked;
+                toggleOrderSelection(cb.value, checkbox.checked);
+            });
+        }
+
+        function updateSelectedCount() {
+            const countElement = document.getElementById('selected-count');
+            if (countElement) {
+                countElement.textContent = `${selectedOrders.size} orders selected`;
+            }
+        }
+
+        function rejectOrder(orderId) {
+            if (confirm('Are you sure you want to reject this order?')) {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const orderIndex = orders.findIndex(o => o.id === orderId);
+                
+                if (orderIndex !== -1) {
+                    // Return stock to inventory
+                    const order = orders[orderIndex];
+                    order.items.forEach(item => {
+                        const product = products.find(p => p.id === item.id);
+                        if (product) {
+                            product.stock += item.quantity;
+                        }
+                    });
+                    
+                    // Update order status
+                    orders[orderIndex].status = 'rejected';
+                    orders[orderIndex].rejectedAt = new Date().toISOString();
+                    
+                    // Save changes
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    localStorage.setItem('products', JSON.stringify(products));
+                    
+                    // Show notification
+                    showNotification('Order rejected successfully!', 'success');
+                    
+                    // Refresh views
+                    if (currentAdminSection === 'dashboard') {
+                        loadRecentOrders();
+                        updateRevenueStats();
+                        updateStockStats();
+                    } else if (currentAdminSection === 'orders') {
+                        loadAdminOrders();
+                    }
+                    updateOrderStats();
+                    
+                    // Update customer view
+                    loadCustomerOrders();
+                }
+            }
+        }
+
+        function completeOrder(orderId) {
+            if (confirm('Mark this order as completed?')) {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const orderIndex = orders.findIndex(o => o.id === orderId);
+                
+                if (orderIndex !== -1) {
+                    orders[orderIndex].status = 'completed';
+                    orders[orderIndex].completedAt = new Date().toISOString();
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                    
+                    showNotification('Order marked as completed!', 'success');
+                    
+                    // Refresh views
+                    if (currentAdminSection === 'dashboard') {
+                        loadRecentOrders();
+                    } else if (currentAdminSection === 'orders') {
+                        loadAdminOrders();
+                    }
+                    updateOrderStats();
+                }
+            }
+        }
+
+        function deleteSingleOrder(orderId) {
+            if (confirm('Are you sure you want to delete this order? This action cannot be undone.')) {
+                let orders = JSON.parse(localStorage.getItem('orders')) || [];
+                orders = orders.filter(order => order.id !== orderId);
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                showNotification('Order deleted successfully!', 'success');
+                
+                // Remove from selection
+                selectedOrders.delete(orderId);
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                    updateRevenueStats();
+                    updateOrderStats();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                
+                // Update customer view
+                loadCustomerOrders();
+            }
+        }
+
+        function rejectSelectedOrders() {
+            if (selectedOrders.size === 0) {
+                showNotification('Please select orders to reject', 'error');
+                return;
+            }
+            
+            if (confirm(`Reject ${selectedOrders.size} selected order(s)? Stock will be returned to inventory.`)) {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                let rejectedCount = 0;
+                
+                selectedOrders.forEach(orderId => {
+                    const orderIndex = orders.findIndex(o => o.id === orderId);
+                    if (orderIndex !== -1 && orders[orderIndex].status !== 'rejected') {
+                        // Return stock to inventory
+                        const order = orders[orderIndex];
+                        order.items.forEach(item => {
+                            const product = products.find(p => p.id === item.id);
+                            if (product) {
+                                product.stock += item.quantity;
+                            }
+                        });
+                        
+                        // Update order status
+                        orders[orderIndex].status = 'rejected';
+                        orders[orderIndex].rejectedAt = new Date().toISOString();
+                        rejectedCount++;
+                    }
+                });
+                
+                // Save changes
+                localStorage.setItem('orders', JSON.stringify(orders));
+                localStorage.setItem('products', JSON.stringify(products));
+                
+                // Clear selection
+                selectedOrders.clear();
+                
+                showNotification(`${rejectedCount} order(s) rejected successfully!`, 'success');
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                    updateRevenueStats();
+                    updateStockStats();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                updateOrderStats();
+                
+                // Update customer view
+                loadCustomerOrders();
+            }
+        }
+
+        function deleteSelectedOrders() {
+            if (selectedOrders.size === 0) {
+                showNotification('Please select orders to delete', 'error');
+                return;
+            }
+            
+            if (confirm(`Permanently delete ${selectedOrders.size} selected order(s)? This action cannot be undone.`)) {
+                let orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const initialCount = orders.length;
+                
+                // Filter out selected orders
+                orders = orders.filter(order => !selectedOrders.has(order.id));
+                
+                // Save changes
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                // Clear selection
+                selectedOrders.clear();
+                
+                const deletedCount = initialCount - orders.length;
+                showNotification(`${deletedCount} order(s) deleted successfully!`, 'success');
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                    updateRevenueStats();
+                    updateOrderStats();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                
+                // Update customer view
+                loadCustomerOrders();
+            }
+        }
+
+        function completeSelectedOrders() {
+            if (selectedOrders.size === 0) {
+                showNotification('Please select orders to mark as completed', 'error');
+                return;
+            }
+            
+            if (confirm(`Mark ${selectedOrders.size} selected order(s) as completed?`)) {
+                const orders = JSON.parse(localStorage.getItem('orders')) || [];
+                let completedCount = 0;
+                
+                selectedOrders.forEach(orderId => {
+                    const orderIndex = orders.findIndex(o => o.id === orderId);
+                    if (orderIndex !== -1 && orders[orderIndex].status !== 'completed') {
+                        orders[orderIndex].status = 'completed';
+                        orders[orderIndex].completedAt = new Date().toISOString();
+                        completedCount++;
+                    }
+                });
+                
+                // Save changes
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                // Clear selection
+                selectedOrders.clear();
+                
+                showNotification(`${completedCount} order(s) marked as completed!`, 'success');
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                updateOrderStats();
+            }
+        }
+
+        function cleanupOldOrders() {
+            const daysOld = prompt('Delete orders older than how many days? (Default: 30)', '30');
+            if (!daysOld) return;
+            
+            const days = parseInt(daysOld);
+            if (isNaN(days) || days < 1) {
+                showNotification('Please enter a valid number of days', 'error');
+                return;
+            }
+            
+            const cutoffDate = new Date();
+            cutoffDate.setDate(cutoffDate.getDate() - days);
+            
+            if (confirm(`This will permanently delete all orders older than ${days} days (before ${cutoffDate.toLocaleDateString()}). This action cannot be undone.`)) {
+                let orders = JSON.parse(localStorage.getItem('orders')) || [];
+                const initialCount = orders.length;
+                
+                // Filter out old orders
+                orders = orders.filter(order => {
+                    const orderDate = new Date(order.date);
+                    return orderDate >= cutoffDate;
+                });
+                
+                // Save changes
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                const deletedCount = initialCount - orders.length;
+                showNotification(`${deletedCount} old order(s) deleted successfully!`, 'success');
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                    updateRevenueStats();
+                    updateOrderStats();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                
+                // Update customer view
+                loadCustomerOrders();
+            }
+        }
+
+        function updateAdminNotificationCount() {
+            const notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+            const unreadCount = notifications.filter(n => !n.read).length;
+            
+            const notificationBadge = document.getElementById('notification-count');
+            if (notificationBadge) {
+                notificationBadge.textContent = unreadCount;
+                notificationBadge.style.display = unreadCount > 0 ? 'flex' : 'none';
+            }
+        }
+
+        function showNotifications() {
+            const notifications = JSON.parse(localStorage.getItem('adminNotifications')) || [];
+            
+            let notificationHtml = '<h3>Notifications</h3>';
+            if (notifications.length === 0) {
+                notificationHtml += '<p>No notifications</p>';
+            } else {
+                notifications.forEach(notification => {
+                    notificationHtml += `
+                        <div style="border-bottom: 1px solid #eee; padding: 10px 0;">
+                            <strong>${notification.type.replace('_', ' ')}</strong><br>
+                            ${notification.message}<br>
+                            <small>${new Date(notification.time).toLocaleString()}</small>
+                        </div>
+                    `;
+                });
+                
+                // Mark all as read
+                notifications.forEach(n => n.read = true);
+                localStorage.setItem('adminNotifications', JSON.stringify(notifications));
+                updateAdminNotificationCount();
+            }
+            
+            alert(notificationHtml);
+        }
+
+        function viewOrderDetails(orderId) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const order = orders.find(o => o.id === orderId);
+            
+            if (order) {
+                let itemsHtml = '';
+                order.items.forEach(item => {
+                    itemsHtml += `${item.name} x${item.quantity} - GH₵${(item.price * item.quantity).toFixed(2)}<br>`;
+                });
+                
+                const details = `
+                    Order Details:
+                    ID: ${order.id}
+                    Customer: ${order.customer.name}
+                    Email: ${order.customer.email}
+                    Phone: ${order.customer.phone}
+                    Address: ${order.customer.address}
+                    Location: ${order.customer.location}
+                    Total: GH₵${order.total.toFixed(2)}
+                    Status: ${order.status}
+                    Transaction ID: ${order.transactionId}
+                    Date: ${new Date(order.date).toLocaleString()}
+                    ${order.rejectedAt ? `Rejected: ${new Date(order.rejectedAt).toLocaleString()}` : ''}
+                    ${order.completedAt ? `Completed: ${new Date(order.completedAt).toLocaleString()}` : ''}
+                    
+                    Items:
+                    ${itemsHtml}
+                `;
+                
+                alert(details);
+            }
+        }
+
+        function verifyPayment(orderId) {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const orderIndex = orders.findIndex(o => o.id === orderId);
+            
+            if (orderIndex !== -1) {
+                orders[orderIndex].status = 'verified';
+                localStorage.setItem('orders', JSON.stringify(orders));
+                
+                showNotification('Payment verified successfully!', 'success');
+                
+                // Refresh views
+                if (currentAdminSection === 'dashboard') {
+                    loadRecentOrders();
+                    updateRevenueStats();
+                } else if (currentAdminSection === 'orders') {
+                    loadAdminOrders();
+                }
+                updateOrderStats();
+            }
+        }
+
+        // ========== PRODUCT MANAGEMENT ==========
+        function openProductModal(productId = null) {
+            const modal = document.getElementById('product-modal');
+            const form = document.getElementById('product-form');
+            const deleteBtn = document.getElementById('delete-product');
+            
+            // Reset preview
+            const previewImg = document.getElementById('preview-img');
+            const placeholder = document.querySelector('.image-preview-placeholder');
+            previewImg.style.display = 'none';
+            placeholder.style.display = 'block';
+            placeholder.innerHTML = '<i class="fas fa-image"></i><p>No image selected</p>';
+            document.getElementById('url-input-group').style.display = 'none';
+            document.getElementById('image-url').value = '';
+            document.getElementById('product-image').value = '';
+            
+            if (productId) {
+                // Edit existing product
+                const product = products.find(p => p.id == productId);
+                
+                if (product) {
+                    document.getElementById('product-id').value = product.id;
+                    document.getElementById('product-name').value = product.name;
+                    document.getElementById('product-category').value = product.category;
+                    document.getElementById('product-price').value = product.price;
+                    document.getElementById('product-stock').value = product.stock;
+                    document.getElementById('product-discount').value = product.discount || 0;
+                    document.getElementById('product-description').value = product.description || '';
+                    
+                    // Set and preview image
+                    if (product.image) {
+                        document.getElementById('product-image').value = product.image;
+                        previewImg.src = product.image;
+                        previewImg.style.display = 'block';
+                        placeholder.style.display = 'none';
+                    }
+                    
+                    deleteBtn.style.display = 'inline-block';
+                }
+            } else {
+                // Add new product
+                form.reset();
+                document.getElementById('product-id').value = '';
+                deleteBtn.style.display = 'none';
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function editProduct(productId) {
+            openProductModal(productId);
+        }
+
+        function saveProduct() {
+            const productId = document.getElementById('product-id').value;
+            const imageData = document.getElementById('product-image').value;
+            
+            if (!imageData) {
+                showNotification('Please add a product image', 'error');
+                return;
+            }
+            
+            const productData = {
+                id: productId || Date.now(),
+                name: document.getElementById('product-name').value,
+                category: document.getElementById('product-category').value,
+                price: parseFloat(document.getElementById('product-price').value),
+                stock: parseInt(document.getElementById('product-stock').value),
+                discount: parseInt(document.getElementById('product-discount').value) || 0,
+                image: imageData,
+                description: document.getElementById('product-description').value,
+                dateAdded: new Date().toISOString()
+            };
+            
+            if (productId) {
+                // Update existing product
+                const index = products.findIndex(p => p.id == productId);
+                if (index !== -1) {
+                    products[index] = { ...products[index], ...productData };
+                }
+            } else {
+                // Add new product
+                products.push(productData);
+            }
+            
+            localStorage.setItem('products', JSON.stringify(products));
+            
+            showNotification('Product saved successfully!', 'success');
+            closeModal('product-modal');
+            
+            // Refresh displays
+            displayProducts(products);
+            if (currentAdminSection === 'products') {
+                loadAdminProducts();
+            }
+            updateStockStats();
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products = products.filter(p => p.id != productId);
+                localStorage.setItem('products', JSON.stringify(products));
+                
+                showNotification('Product deleted successfully!', 'success');
+                
+                // Refresh displays
+                displayProducts(products);
+                if (currentAdminSection === 'products') {
+                    loadAdminProducts();
+                }
+                updateStockStats();
+                
+                // Close modal if open
+                closeModal('product-modal');
+            }
+        }
+
+        function deleteCurrentProduct() {
+            const productId = document.getElementById('product-id').value;
+            deleteProduct(productId);
+        }
+
+        function logoutAdmin() {
+            localStorage.removeItem('adminAuthenticated');
+            isAdminAuthenticated = false;
+            showNotification('Logged out successfully', 'success');
+            showMainStore();
+        }
+
+        // ========== PAGE NAVIGATION ==========
+        function showMainStore() {
+            console.log('Showing main store');
+            document.getElementById('main-store').style.display = 'block';
+            document.getElementById('customer-dashboard-page').style.display = 'none';
+            document.getElementById('admin-login-page').style.display = 'none';
+            document.getElementById('admin-dashboard-page').style.display = 'none';
+            
+            // Reset admin section
+            currentAdminSection = 'dashboard';
+            selectedOrders.clear();
+        }
+
+        function showCustomerDashboard() {
+            if (!currentCustomer) {
+                showAuthModal();
+                return;
+            }
+            
+            document.getElementById('main-store').style.display = 'none';
+            document.getElementById('customer-dashboard-page').style.display = 'block';
+            document.getElementById('admin-login-page').style.display = 'none';
+            document.getElementById('admin-dashboard-page').style.display = 'none';
+            
+            loadCustomerOrders();
+            loadCustomerProfile();
+            showDashboardSection('orders');
+        }
+
+        function showDashboardSection(section) {
+            document.querySelectorAll('.dashboard-section').forEach(div => {
+                div.style.display = 'none';
+            });
+            const sectionElem = document.getElementById(`dashboard-${section}`);
+            if (sectionElem) {
+                sectionElem.style.display = 'block';
+            }
+            
+            // Update active tab
+            document.querySelectorAll('.dashboard-sidebar a').forEach(a => {
+                a.classList.remove('active');
+            });
+            const activeLink = document.querySelector(`.dashboard-sidebar a[onclick*="${section}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+
+        function loadCustomerOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders')) || [];
+            const customerOrders = orders.filter(order => 
+                order.customerId === currentCustomer?.id || order.customer.email === currentCustomer?.email
+            );
+            
+            const ordersTable = document.getElementById('customer-orders');
+            if (!ordersTable) return;
+            
+            ordersTable.innerHTML = '';
+            
+            customerOrders.sort((a, b) => new Date(b.date) - new Date(a.date))
+                .forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${order.id}</td>
+                        <td>${new Date(order.date).toLocaleDateString()}</td>
+                        <td>GH₵${order.total.toFixed(2)}</td>
+                        <td><span class="order-status status-${order.status}">${order.status}</span></td>
+                        <td>
+                            <button class="btn-view btn-small" onclick="viewOrderDetails('${order.id}')">
+                                View
+                            </button>
+                        </td>
+                    `;
+                    ordersTable.appendChild(row);
+                });
+        }
+
+        function loadCustomerProfile() {
+            if (!currentCustomer) return;
+            
+            const nameInput = document.getElementById('customer-name');
+            const emailInput = document.getElementById('customer-email');
+            const phoneInput = document.getElementById('customer-phone');
+            
+            if (nameInput) nameInput.value = currentCustomer.name || '';
+            if (emailInput) emailInput.value = currentCustomer.email || '';
+            if (phoneInput) phoneInput.value = currentCustomer.phone || '';
+        }
+
+        // ========== UTILITY FUNCTIONS ==========
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+                color: white;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                max-width: 300px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function getSampleProducts() {
+            return [
+                {
+                    id: 1,
+                    name: "Luxury Perfume No. 1",
+                    category: "perfume",
+                    price: 299.99,
+                    discount: 10,
+                    stock: 15,
+                    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "Premium luxury perfume with long-lasting scent"
+                },
+                {
+                    id: 2,
+                    name: "Diamond Necklace",
+                    category: "jewelry",
+                    price: 1299.99,
+                    discount: 0,
+                    stock: 5,
+                    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "18K gold diamond necklace"
+                },
+                {
+                    id: 3,
+                    name: "Premium Silk Dress",
+                    category: "clothing",
+                    price: 499.99,
+                    discount: 15,
+                    stock: 8,
+                    image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "Handmade silk evening dress"
+                },
+                {
+                    id: 4,
+                    name: "Gold Watch",
+                    category: "jewelry",
+                    price: 899.99,
+                    discount: 5,
+                    stock: 12,
+                    image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "Luxury gold wristwatch"
+                },
+                {
+                    id: 5,
+                    name: "Leather Jacket",
+                    category: "clothing",
+                    price: 399.99,
+                    discount: 20,
+                    stock: 6,
+                    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "Genuine leather jacket"
+                },
+                {
+                    id: 6,
+                    name: "French Perfume",
+                    category: "perfume",
+                    price: 249.99,
+                    discount: 0,
+                    stock: 20,
+                    image: "https://images.unsplash.com/photo-1590736969956-6d9c2a8d6976?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+                    description: "Imported French perfume"
+                }
+            ];
+        }
+
+        // Initialize the website
+        console.log('DEEBEE LUXURY Website Loaded Successfully!');
+    </script>
+</body>
+</html>
